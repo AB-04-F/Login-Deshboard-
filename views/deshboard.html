@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="text/javascript"></script> -->
+
+    <title>
+        <%= title%>
+    </title>
+
+
+
+</head>
+<style>
+    body {
+        padding: 50px;
+        font: 10px "Lucida Grande", Helvetica, Arial, sans-serif;
+        background-color: blanchedalmond;
+    }
+    
+    h1 {
+        color: #0008ff;
+        font-size: 20px;
+    }
+    
+    p {
+        font-size: 20px;
+        align-items: center;
+        color: tomato;
+    }
+    
+    .employee-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .employee-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+    }
+    
+    .employee-table th,
+    .employee-table td {
+        padding: 12px 15px;
+    }
+    
+    .pagination {
+        display: inline-block;
+    }
+    
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+    
+    .pagination a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+    
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+    }
+    
+    .btn {
+        padding: 0px 10px;
+        margin: 10px;
+        border: none;
+        outline: none;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        display: none;
+    }
+    
+    label {
+        cursor: pointer;
+    }
+    /* input {
+        width: 20px;
+        height: 20px;
+        float: left;
+    } */
+</style>
+<script>
+    function test(pageNumber) {
+
+        var page = "#page-id-" + pageNumber;
+        $('.select').hide()
+        $(page).show()
+
+    }
+</script>
+
+<body>
+    <h1> Deshboard Page </h>
+        <p>
+            Username:
+            <%= username %>
+
+        </p>
+
+        <table id="myTable" class="employee-table">
+            <thead>
+                <tr>
+
+                    <th scope="col">first_name</th>
+                    <th scope="col">last_name</th>
+                    <th scope="col">email</th>
+                    <th scope="col">phone_number</th>
+                    <th scope="col">department</th>
+                    <th scope="col">designation</th>
+                    <th scope="col">salary</th>
+                    <th scope="col">hire_date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(employees.length > 0){%>
+                    <% for(let i=0; i < employees.length; i++) { %>
+
+                        <tr>
+
+
+                            <td>
+                                <%=employees[i].first_name%>
+                            </td>
+                            <td>
+                                <%=employees[i].last_name%>
+                            </td>
+                            <td>
+                                <%=employees[i].email%>
+                            </td>
+                            <td>
+                                <%=employees[i].phone_number%>
+                            </td>
+                            <td>
+                                <%=employees[i].department%>
+                            </td>
+                            <td>
+                                <%=employees[i].designation%>
+                            </td>
+                            <td>
+                                <%=employees[i].salary%>
+                            </td>
+                            <td>
+                                <%=employees[i].hire_date%>
+                            </td>
+                        </tr>
+                        <% }
+                        }else{ %>
+                            <tr>
+                                <td>No User!</td>
+                            </tr>
+
+                            <% } %>
+                                <tr>
+
+            </tbody>
+
+        </table>
+
+
+
+
+        <div id="choose">
+        </div>
+
+
+        <script language="javascript">
+            $(function() {
+                $('#choose').pagination({
+                    items: 100,
+                    itemsOnPage: 10,
+                    cssStyle: 'light-theme',
+                    onPageClick: function(pageNumber) {
+                        test(pageNumber)
+                    }
+                });
+            });
+        </script>
+
+</body>
+
+</html>
